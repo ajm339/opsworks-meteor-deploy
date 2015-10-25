@@ -7,18 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-# execute "Change to Meteor Application Directory" do
-#   command "cd "
-# end
-
-# execute "Configure Meteor Dependencies with npm install" do
-#   command "(cd programs/server && npm install)"
-# end
-
-# execute "Start Meteor as Node Application" do
-#   command "node main.js"
-# end
-
 bash "meteor install" do 
 	user "root"
 	cwd "#{node["deploy"]["macrofuel_meteor"]["deploy_to"]}/current/programs/server"
@@ -31,6 +19,6 @@ bash "meteor start" do
 	user "root"
 	cwd "#{node["deploy"]["macrofuel_meteor"]["deploy_to"]}/current"
 	code <<-EOH
-		node main.js
+		PORT=#{node["deploy"]["macrofuel_meteor"]["PORT"]} MONGO_URL=#{node["deploy"]["macrofuel_meteor"]["MONGO_URL"]} ROOT_URL=#{node["deploy"]["macrofuel_meteor"]["ROOT_URL"]} MAIL_URL=#{node["deploy"]["macrofuel_meteor"]["MAIL_URL"]} node main.js
 	EOH
 end
