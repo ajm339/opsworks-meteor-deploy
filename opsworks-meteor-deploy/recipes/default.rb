@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 execute "Change to Meteor Application Directory" do
-  command "cd #{node[:deploy][:deploy_to]}"
+  command "cd #{deploy[:deploy_to]}/current"
 end
 
 execute "Current Folder" do
