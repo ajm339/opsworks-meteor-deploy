@@ -10,10 +10,6 @@ execute "Change to Meteor Application Directory" do
   command "cd #{node["deploy"]["macrofuel_meteor"]["deploy_to"]}/current"
 end
 
-execute "Current Folder" do
-  command "cd current"
-end
-
 execute "Configure Meteor Dependencies with npm install" do
   command "(cd programs/server && npm install)"
 end
