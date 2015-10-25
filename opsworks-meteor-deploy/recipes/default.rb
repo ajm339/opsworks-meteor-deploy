@@ -15,11 +15,16 @@ bash "meteor install" do
 	EOH
 end
 
-bash "meteor start" do 
-	user "root"
+execute "Start Meteor as Node Application" do
 	cwd "#{node["deploy"]["macrofuel_meteor"]["deploy_to"]}/current"
-	timeout 10
-	code <<-EOH
-		PORT=#{node["deploy"]["macrofuel_meteor"]["PORT"]} MONGO_URL=#{node["deploy"]["macrofuel_meteor"]["MONGO_URL"]} ROOT_URL=#{node["deploy"]["macrofuel_meteor"]["ROOT_URL"]} MAIL_URL=#{node["deploy"]["macrofuel_meteor"]["MAIL_URL"]} node main.js
-	EOH
+	command "PORT=#{node["deploy"]["macrofuel_meteor"]["PORT"]} MONGO_URL=#{node["deploy"]["macrofuel_meteor"]["MONGO_URL"]} ROOT_URL=#{node["deploy"]["macrofuel_meteor"]["ROOT_URL"]} MAIL_URL=#{node["deploy"]["macrofuel_meteor"]["MAIL_URL"]} node main.js"
 end
+
+# bash "meteor start" do 
+# 	user "root"
+# 	cwd "#{node["deploy"]["macrofuel_meteor"]["deploy_to"]}/current"
+# 	timeout 10
+# 	code <<-EOH
+# 		PORT=#{node["deploy"]["macrofuel_meteor"]["PORT"]} MONGO_URL=#{node["deploy"]["macrofuel_meteor"]["MONGO_URL"]} ROOT_URL=#{node["deploy"]["macrofuel_meteor"]["ROOT_URL"]} MAIL_URL=#{node["deploy"]["macrofuel_meteor"]["MAIL_URL"]} node main.js
+# 	EOH
+# end
