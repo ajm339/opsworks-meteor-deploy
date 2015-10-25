@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 execute "Change to Meteor Application Directory" do
-  command "cd #{deploy[:deploy_to]}/current"
+  command "cd #{node["deploy"]["macrofuel_meteor"]["deploy_to"]}/current"
 end
 
 execute "Current Folder" do
