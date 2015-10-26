@@ -15,9 +15,12 @@ bash "meteor install" do
 	EOH
 end
 
-service "meteor" do
+service "meteor start" do
 	init_command "cd #{node["deploy"]["macrofuel_meteor"]["deploy_to"]}/current"
-	start_command "PORT=#{node["deploy"]["macrofuel_meteor"]["PORT"]} MONGO_URL=#{node["deploy"]["macrofuel_meteor"]["MONGO_URL"]} ROOT_URL=#{node["deploy"]["macrofuel_meteor"]["ROOT_URL"]} MAIL_URL=#{node["deploy"]["macrofuel_meteor"]["MAIL_URL"]} node main.js"
+	start_command "PORT=#{node["deploy"]["macrofuel_meteor"]["PORT"]} MONGO_URL=#{node["deploy"]["macrofuel_meteor"]["MONGO_URL"]} ROOT_URL=#{node["deploy"]["macrofuel_meteor"]["ROOT_URL"]} MAIL_URL=#{node["deploy"]["macrofuel_meteor"]["MAIL_URL"]} forever start main.js"
+	restart_command "PORT=#{node["deploy"]["macrofuel_meteor"]["PORT"]} MONGO_URL=#{node["deploy"]["macrofuel_meteor"]["MONGO_URL"]} ROOT_URL=#{node["deploy"]["macrofuel_meteor"]["ROOT_URL"]} MAIL_URL=#{node["deploy"]["macrofuel_meteor"]["MAIL_URL"]} forever restart main.js"
+	stop_command "forever stop main.js"
+	action [:enable, :start, :restart, :stop]
 end
 
 # execute "Start Meteor as Node Application" do
