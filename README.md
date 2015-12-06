@@ -19,7 +19,7 @@ This repository includes 2 cookbooks for deploying and starting a meteor applica
 	```
 	{
 	  "deploy" : {
-	    "macrofuel_meteor" : {
+	    "app_name" : {
 	      "PORT" : "port",
 	      "ROOT_URL" : "root_url",
 	      "MONGO_URL" : "mongo_url",
