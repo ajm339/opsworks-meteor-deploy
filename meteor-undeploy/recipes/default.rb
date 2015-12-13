@@ -8,6 +8,6 @@
 #
 
 execute "Stop Meteor as Node Application" do
-	cwd "#{node["deploy"]["YOUR_APP_NAME"]["deploy_to"]}/current"
+	cwd "#{node["deploy"]["macrofuel_store"]["deploy_to"]}/current"
 	command "forever stop main.js"
 end
