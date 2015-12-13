@@ -9,13 +9,13 @@
 
 bash "meteor install" do 
 	user "root"
-	cwd "#{node["deploy"]["macrofuel_store"]["deploy_to"]}/current/programs/server"
+	cwd "#{node["deploy"]["macrofuel_store"]["deploy_to"]}/current/bundle/programs/server"
 	code <<-EOH
 		npm install
 	EOH
 end
 
 execute "Start Meteor as Node Application" do
-	cwd "#{node["deploy"]["macrofuel_store"]["deploy_to"]}/current"
+	cwd "#{node["deploy"]["macrofuel_store"]["deploy_to"]}/current/bundle"
 	command "PORT=#{node["deploy"]["macrofuel_store"]["PORT"]} MONGO_URL=#{node["deploy"]["macrofuel_store"]["MONGO_URL"]} ROOT_URL=#{node["deploy"]["macrofuel_store"]["ROOT_URL"]} MAIL_URL=#{node["deploy"]["macrofuel_store"]["MAIL_URL"]} forever start main.js"
 end
