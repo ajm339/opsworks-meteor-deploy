@@ -8,7 +8,7 @@ This repository includes 2 cookbooks for deploying and starting a meteor applica
 
 
 1. The first cookbook installs [foreverjs](https://github.com/foreverjs/forever), the npm module that can start a node application as a daemon.
-	1. This cookbook should be called as `foreverjs` in AWS Opsworks under the Configure series of Chef recipes for the Node.js layer.
+	1. This cookbook should be called as `foreverjs` in AWS Opsworks under the Setup series of Chef recipes for the Node.js layer.
 2. The second cookbook, meteor-deploy, runs the two commands necessary to start the node application. 
 	1. Commands executed (similar to the `meteor build` instructions)
 		1. `(cd programs/server && npm install)`
@@ -19,7 +19,7 @@ This repository includes 2 cookbooks for deploying and starting a meteor applica
 	```
 	{
 	  "deploy" : {
-	    "macrofuel_meteor" : {
+	    "YOUR_APP_NAME" : {
 	      "PORT" : "port",
 	      "ROOT_URL" : "root_url",
 	      "MONGO_URL" : "mongo_url",
@@ -28,6 +28,8 @@ This repository includes 2 cookbooks for deploying and starting a meteor applica
 	  }
 	}
 	```
+3. The third cookbook, meteor-undeploy, runs the command necessary to stop the meteor application from running with `forever stop main.js`.
+	1. This cookbook should be called as `meteor-undeploy` in the Undeploy series of Chef recipes for the Node.js layer. 
 		  
 ###### Note 1: You need to build the application for the proper architecture i.e. if you run the command on an OS X machine, but plan to deploy to a linux server, you need to specify the architecture with `--architecture`.
 
