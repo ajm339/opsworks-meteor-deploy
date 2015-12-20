@@ -9,5 +9,5 @@
 
 execute "Install phantomjs" do
 	user "root"
-	command "apt-get install phantomjs"
+	command "npm install phantomjs"
 end
