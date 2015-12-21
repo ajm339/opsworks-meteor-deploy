@@ -15,7 +15,7 @@ bash "meteor install" do
 	EOH
 end
 
-if( defined?( node["deploy"]["macrofuel_store"]["DISABLE_WEBSOCKETS"] ) )
+if( defined?( node["deploy"]["macrofuel_store"]["DISABLE_WEBSOCKETS"] ).nil? )
 
 	execute "Start Meteor as Node Application with Websockets enabled (no DISABLE_WEBSOCKETS option available)" do
 		cwd "#{node["deploy"]["macrofuel_store"]["deploy_to"]}/current"
