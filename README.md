@@ -25,7 +25,8 @@ This repository includes 2 cookbooks for deploying and starting a meteor applica
 	      "PORT" : "port",
 	      "ROOT_URL" : "root_url",
 	      "MONGO_URL" : "mongo_url",
-	      "MAIL_URL" : "mail_url"
+	      "MAIL_URL" : "mail_url",
+	      [optional] "DISABLE_WEBSOCKETS" : 0 or 1
 	    }
 	  }
 	}
