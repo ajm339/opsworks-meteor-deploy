@@ -31,7 +31,7 @@ This repository includes 2 cookbooks for deploying and starting a meteor applica
 	  }
 	}
 	```
-4. The fourth cookbook, meteor-undeploy, runs the command necessary to stop the meteor application from running with `forever stop main.js`.
+4. The fourth cookbook, meteor-undeploy, runs the command necessary to stop the meteor application from running with `forever stopall`.
 	1. This cookbook should be called as `meteor-undeploy` in the Undeploy series of Chef recipes for the Node.js layer. 
 
 		  
@@ -39,6 +39,8 @@ This repository includes 2 cookbooks for deploying and starting a meteor applica
 
 
 ###### Note 2: The `meteor build` output README specifies exporting the ROOT_URL, MONGO_URL, and MAIL_URL variable then running `node main.js`.  This does not work well with Opsworks because Chef recipies wait for the specified command to finish, so foreverjs helps the cookbook to finish executing rather than stall, and specifiying these variables in the start command is simpler than exporting them into the shell environment.
+
+###### Note 3: The undeploy cookbook does not run properly unless the developer explicity runs it in the Opsworks Deploy Apps commands.  It should run automatically when deploying a new version of the application, but for some reason it does not finish running `forever stopall`; therefore `Undeploy` needs to be explicity run before running `Deploy`.
 
 
 
