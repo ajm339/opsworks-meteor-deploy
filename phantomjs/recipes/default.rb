@@ -9,5 +9,5 @@
 
 execute "Install phantomjs" do
 	user "root"
-	command "npm install phantomjs"
+	command "npm install phantomjs-prebuilt"
 end
