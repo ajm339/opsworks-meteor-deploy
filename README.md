@@ -13,7 +13,7 @@ This repository includes 2 cookbooks for deploying and starting a meteor applica
 	1. This cookbook should be called as `phantomjs` in AWS Opsworks under the Setup series of Chef recipes for the Node.js layer.
 3. The third cookbook installs node version manager, also known as [nvm](https://github.com/creationix/nvm).  This is necessary with Meteor 1.3.* because the latest version of Meteor needs node v0.10.41 or greater (but not greater v0.10.4x).  Opsworks only supports node v0.10.40 as of May 2016, so the nvm script is needed to upgrade to node v0.10.45.
 	1. This cookbook should be called as `nvm` in AWS Opsworks under the Setup series of Chef recipes for the Node.js layer.
-4. The third cookbook, meteor-deploy, runs the two commands necessary to start the node application. 
+4. The fourth cookbook, meteor-deploy, runs the two commands necessary to start the node application. 
 	1. Commands executed (similar to the `meteor build` instructions)
 		1. `(cd programs/server && npm install)`
 		2. `PORT=port ROOT_URL=root_url MONGO_URL=mongo_url MAIL_URL=mail_url forever start main.js`
@@ -33,7 +33,7 @@ This repository includes 2 cookbooks for deploying and starting a meteor applica
 	  }
 	}
 	```
-5. The fourth cookbook, meteor-undeploy, runs the command necessary to stop the meteor application from running with `forever stopall`.
+5. The fifth cookbook, meteor-undeploy, runs the command necessary to stop the meteor application from running with `forever stopall`.
 	1. This cookbook should be called as `meteor-undeploy` in the Undeploy series of Chef recipes for the Node.js layer. 
 
 		  
