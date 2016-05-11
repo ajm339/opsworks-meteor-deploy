@@ -1,11 +1,11 @@
-nvm CHANGELOG
-=============
+node-v0.10.45 CHANGELOG
+=======================
 
-This file is used to list changes made in each version of the nvm cookbook.
+This file is used to list changes made in each version of the node-v0.10.45 cookbook.
 
 0.1.0
 -----
-- [your_name] - Initial release of nvm
+- [your_name] - Initial release of node-v0.10.45
 
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
