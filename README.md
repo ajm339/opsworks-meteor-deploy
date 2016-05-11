@@ -8,35 +8,35 @@ This repository includes 2 cookbooks for deploying and starting a meteor applica
 
 
 1. The first cookbook installs [foreverjs](https://github.com/foreverjs/forever), the npm module that can start a node application as a daemon.
-	1. This cookbook should be called as `foreverjs` in AWS Opsworks under the Setup series of Chef recipes for the Node.js layer.
+  1. This cookbook should be called as `foreverjs` in AWS Opsworks under the Setup series of Chef recipes for the Node.js layer.
 2. The second cookbook installs [phantomjs](http://phantomjs.org/), ~~this dependency is useful for certain Meteor functionality such as using [spiderable](https://atmospherejs.com/meteor/spiderable) for SEO.~~ Spiderable does not work well as of May 2016.  Phantomjs is still helpful for rendering the meteor app for SEO.  The Meteor Development Group now recommends using [prerender.io](https://prerender.io/) for SEO.
-	1. This cookbook should be called as `phantomjs` in AWS Opsworks under the Setup series of Chef recipes for the Node.js layer.
+  1. This cookbook should be called as `phantomjs` in AWS Opsworks under the Setup series of Chef recipes for the Node.js layer.
 3. The third cookbook installs node version manager, also known as [nvm](https://github.com/creationix/nvm).  This is necessary with Meteor 1.3.* because the latest version of Meteor needs node v0.10.41 or greater (but not greater v0.10.4x).  Opsworks only supports node v0.10.40 as of May 2016, so the nvm script is needed to upgrade to node v0.10.45.
-	1. This cookbook should be called as `nvm` in AWS Opsworks under the Setup series of Chef recipes for the Node.js layer.
+  1. This cookbook should be called as `nvm` in AWS Opsworks under the Setup series of Chef recipes for the Node.js layer.  In order to use this, you must have nvm already installed on the instance.  Please use Amazon Custom AMI Name: macrofuel-nvm-node-0.10.45, AMI Id: ami-3229c55f in the US East Region as your Opsworks Instance configuration.  Copy it to your AWS account and select "Custom AMI" in your Opsworks Stack Settings.
 4. The fourth cookbook, meteor-deploy, runs the two commands necessary to start the node application. 
-	1. Commands executed (similar to the `meteor build` instructions)
-		1. `(cd programs/server && npm install)`
-		2. `PORT=port ROOT_URL=root_url MONGO_URL=mongo_url MAIL_URL=mail_url forever start main.js`
-	2. This cookbook should be called as `meteor-deploy` in the Deploy series of Chef recipes for the Node.js layer. 
-	3. Make sure to replace the directory variable `YOUR_APP_NAME` with your application's name. 
-	4. Place this JSON in the Custom JSON area of the Stack Settings Configuration management
-	```
-	{
-	  "deploy" : {
-	    "YOUR_APP_NAME" : {
-	      "PORT" : "port",
-	      "ROOT_URL" : "root_url",
-	      "MONGO_URL" : "mongo_url",
-	      "MAIL_URL" : "mail_url",
-	      [optional] "DISABLE_WEBSOCKETS" : 0 or 1
-	    }
-	  }
-	}
-	```
+  1. Commands executed (similar to the `meteor build` instructions)
+    1. `(cd programs/server && npm install)`
+    2. `PORT=port ROOT_URL=root_url MONGO_URL=mongo_url MAIL_URL=mail_url forever start main.js`
+  2. This cookbook should be called as `meteor-deploy` in the Deploy series of Chef recipes for the Node.js layer. 
+  3. Make sure to replace the directory variable `YOUR_APP_NAME` with your application's name. 
+  4. Place this JSON in the Custom JSON area of the Stack Settings Configuration management
+  ```
+  {
+    "deploy" : {
+      "YOUR_APP_NAME" : {
+        "PORT" : "port",
+        "ROOT_URL" : "root_url",
+        "MONGO_URL" : "mongo_url",
+        "MAIL_URL" : "mail_url",
+        [optional] "DISABLE_WEBSOCKETS" : 0 or 1
+      }
+    }
+  }
+  ```
 5. The fifth cookbook, meteor-undeploy, runs the command necessary to stop the meteor application from running with `forever stopall`.
-	1. This cookbook should be called as `meteor-undeploy` in the Undeploy series of Chef recipes for the Node.js layer. 
+  1. This cookbook should be called as `meteor-undeploy` in the Undeploy series of Chef recipes for the Node.js layer. 
 
-		  
+      
 ###### Note 1: You need to build the application for the proper architecture i.e. if you run the command on an OS X machine, but plan to deploy to a linux server, you need to specify the architecture with `--architecture`.
 
 
