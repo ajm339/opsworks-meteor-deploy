@@ -1,18 +1,18 @@
 opsworks-meteor-deploy Cookbook
 ===============================
 
-This repository includes 2 cookbooks for deploying and starting a meteor application that has been compiled into a node application on Amazon Web Services Opsworks in a scalable manner.
+This repository includes 4 cookbooks for deploying and starting a meteor application that has been compiled into a node application on Amazon Web Services Opsworks in a scalable manner.  (Based on AWS Opsworks Chef 11, but given the inclusion of a nodejs cookbook, Chef 12 on AWS Opsworks would work as well.)
 
 
 ###Based on deploying a meteor app after running [`meteor build`](https://www.meteor.com/isobuild).  
 
 
-1. The first cookbook installs [foreverjs](https://github.com/foreverjs/forever), the npm module that can start a node application as a daemon.
+1. The first cookbook installs node v0.10.45 follwing [this guide](# Following https://github.com/nodesource/distributions#debinstall).  This is necessary with Meteor 1.3.* because the latest version of Meteor needs node v0.10.41 or greater (but not greater v0.10.4x).  Opsworks with Cheff 11 only supports node v0.10.40 as of May 2016, so the node script is needed to upgrade to node v0.10.45.
+  1. This cookbook should be called as `node-v0_10_45` in AWS Opsworks under the Setup series of Chef recipes for the Node.js layer.
+2. The second cookbook installs [foreverjs](https://github.com/foreverjs/forever), the npm module that can start a node application as a daemon.
   1. This cookbook should be called as `foreverjs` in AWS Opsworks under the Setup series of Chef recipes for the Node.js layer.
-2. The second cookbook installs [phantomjs](http://phantomjs.org/), ~~this dependency is useful for certain Meteor functionality such as using [spiderable](https://atmospherejs.com/meteor/spiderable) for SEO.~~ Spiderable does not work well as of May 2016.  Phantomjs is still helpful for rendering the meteor app for SEO.  The Meteor Development Group now recommends using [prerender.io](https://prerender.io/) for SEO.
+3. The third cookbook installs [phantomjs](http://phantomjs.org/), ~~this dependency is useful for certain Meteor functionality such as using [spiderable](https://atmospherejs.com/meteor/spiderable) for SEO.~~ Spiderable does not work well as of May 2016.  Phantomjs is still helpful for rendering the meteor app for SEO.  The Meteor Development Group now recommends using [prerender.io](https://prerender.io/) for SEO.
   1. This cookbook should be called as `phantomjs` in AWS Opsworks under the Setup series of Chef recipes for the Node.js layer.
-3. The third cookbook installs node version manager, also known as [nvm](https://github.com/creationix/nvm).  This is necessary with Meteor 1.3.* because the latest version of Meteor needs node v0.10.41 or greater (but not greater v0.10.4x).  Opsworks only supports node v0.10.40 as of May 2016, so the nvm script is needed to upgrade to node v0.10.45.
-  1. This cookbook should be called as `nvm` in AWS Opsworks under the Setup series of Chef recipes for the Node.js layer.  In order to use this, you must have nvm already installed on the instance.  Please use Amazon Custom AMI Name: macrofuel-nvm-node-0.10.45, AMI Id: ami-3229c55f in the US East Region as your Opsworks Instance configuration.  Copy it to your AWS account and select "Custom AMI" in your Opsworks Stack Settings.
 4. The fourth cookbook, meteor-deploy, runs the two commands necessary to start the node application. 
   1. Commands executed (similar to the `meteor build` instructions)
     1. `(cd programs/server && npm install)`
@@ -65,5 +65,8 @@ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
