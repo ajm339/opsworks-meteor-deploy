@@ -13,6 +13,11 @@ bash "install node v0.10.45" do
   code <<-EOH
     curl -sL https://deb.nodesource.com/setup_0.10 | sudo -E bash -
     sudo apt-get install -y nodejs
-    ln -s /usr/bin/nodejs /usr/local/bin/node
   EOH
+end
+
+execute "create symlink from nodejs to node" do
+  user "root"
+  command "ln -s /usr/bin/nodejs /usr/local/bin/node"
+  ignore_failure true
 end
