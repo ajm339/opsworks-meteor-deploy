@@ -3,6 +3,10 @@ opsworks-meteor-deploy Cookbook
 
 This repository includes 4 cookbooks for deploying and starting a meteor application that has been compiled into a node application on Amazon Web Services Opsworks in a scalable manner.  (Based on AWS Opsworks Chef 11, but given the inclusion of a nodejs cookbook, Chef 12 on AWS Opsworks would work as well.)
 
+######This version is built for Chef 11 on AWS Opsworks.  If you are using Node 0.10.40, everything will work according to the directions below, without needing the node-v0_10_45 cookbooks.  If you need Node 0.10.45 and must use Chef 11 on AWS Opsworks, the below cookbooks work, but the node-v0_10_45 cookbook will only work on the first boot of an instance, it will fail to deploy and undeploy for all new builds.
+
+######If you want a node version greater than 0.10.40, I recommend you switch to my newer version optimized for Chef 12 on AWS Opsworks and Node 0.10.45 (for Meteor 1.3).  This is easier to user moving forward.
+
 
 ###Based on deploying a meteor app after running [`meteor build`](https://www.meteor.com/isobuild).  
 
