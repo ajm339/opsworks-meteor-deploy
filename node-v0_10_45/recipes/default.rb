@@ -10,14 +10,25 @@
 
 bash "install node v0.10.45" do 
   user "root"
+  cwd "/root"
   code <<-EOH
     curl -sL https://deb.nodesource.com/setup_0.10 | sudo -E bash -
     sudo apt-get install -y nodejs
   EOH
 end
 
-execute "create symlink from nodejs to node" do
+bash "install g++ dependency for fibers" do 
   user "root"
-  command "ln -s /usr/bin/nodejs /usr/local/bin/node"
-  ignore_failure true
+  cwd "/root"
+  code <<-EOH
+    sudo apt-get install -y g++
+  EOH
+end
+
+bash "install build-essential" do 
+  user "root"
+  cwd "/root"
+  code <<-EOH
+    sudo apt-get install -y build-essential
+  EOH
 end
